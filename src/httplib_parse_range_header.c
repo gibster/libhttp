@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (c) 2016 Lammert Bies
  * Copyright (c) 2013-2016 the Civetweb developers
  * Copyright (c) 2004-2013 Sergey Lyubka
@@ -29,6 +29,6 @@
 
 int XX_httplib_parse_range_header( const char *header, int64_t *a, int64_t *b ) {
 
-	return sscanf( header, "bytes=%" INT64_FMT "-%" INT64_FMT, a, b );
+	return sscanf( header, "bytes=%" SCNd64 "-%" SCNd64, a, b );
 
 }  /* XX_httplib_parse_range_header */

@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (c) 2016 Lammert Bies
  * Copyright (c) 2013-2016 the Civetweb developers
  * Copyright (c) 2004-2013 Sergey Lyubka
@@ -74,6 +74,10 @@
 #include <windows.h>
 #endif /* _WIN32 */
 
+#ifdef __MINGW32__
+#include <unistd.h>
+#endif
+
 /*
  * For our Posix emulation functions to open and close directories we need
  * to know the path length. If this length is not set yet, we set it here based
@@ -109,7 +113,9 @@ typedef struct {
 	struct httplib_workerTLS *	waiting_thread; /* The chain of threads */
 } pthread_cond_t;
 
+#ifndef __MINGW32__
 #define pid_t HANDLE /* MINGW typedefs pid_t to int. Using #define here. */
+#endif
 
 #else  /* _WIN32 */
 
@@ -214,7 +220,7 @@ enum {							/*												*/
 							/* Opcodes, from http://tools.ietf.org/html/rfc6455						*/
 enum {							/*												*/
 	WEBSOCKET_OPCODE_CONTINUATION     = 0x00,	/*												*/
-	WEBSOCKET_OPCODE_TEXT             = 0x01,	/*												*/	
+	WEBSOCKET_OPCODE_TEXT             = 0x01,	/*												*/
 	WEBSOCKET_OPCODE_BINARY           = 0x02,	/*												*/
 	WEBSOCKET_OPCODE_CONNECTION_CLOSE = 0x08,	/*												*/
 	WEBSOCKET_OPCODE_PING             = 0x09,	/*												*/

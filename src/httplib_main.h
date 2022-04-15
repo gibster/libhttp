@@ -114,6 +114,7 @@ char static_assert_replacement[1];
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <inttypes.h>
 #include "libhttp.h"
 
 
