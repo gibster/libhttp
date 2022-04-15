@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2016-2019 Lammert Bies
  * Copyright (c) 2013-2016 the Civetweb developers
  * Copyright (c) 2004-2013 Sergey Lyubka
@@ -688,7 +688,7 @@ struct file {
 	int		gzipped; /* set to 1 if the content is gzipped in which case we need a content-encoding: gzip header */
 };
 
-#define STRUCT_FILE_INITIALIZER    { (uint64_t)0, (time_t)0, NULL, NULL, 0, 0 } 
+#define STRUCT_FILE_INITIALIZER    { (uint64_t)0, (time_t)0, NULL, NULL, 0, 0 }
 
 /* Describes a string (chunk of memory). */
 struct vec {
@@ -797,7 +797,7 @@ typedef int		socklen_t;
 #define _DARWIN_UNLIMITED_SELECT
 
 #if defined(_WIN32)
-int		clock_gettime( clockid_t clk_id, struct timespec *tp );
+/* int		clock_gettime( clockid_t clk_id, struct timespec *tp ); */
 #endif
 
 
