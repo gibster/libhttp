@@ -77,13 +77,9 @@ ifdef CRYPTO_LIB
   CFLAGS += -DCRYPTO_LIB=\"$(CRYPTO_LIB)\"
 endif
 
-ifneq ($(OS),Windows_NT)
-OS:=$(shell uname -s)
-endif
-
 # -DNO_SSL=1 -DNO_SSL_DL=1
-DFLAGS = -DUSE_STACK_SIZE=102400
 
+DFLAGS = -DUSE_STACK_SIZE=102400
 INCDIR = include/
 LIBDIR = lib/
 OBJDIR = obj/
@@ -99,10 +95,10 @@ EXEEXT =
 OFLAG  = -o
 XFLAG  = -o
 AR     = ar
-ARQC   = qc 
+ARQC   = qc
 ARQ    = q
 RANLIB = ranlib
-LIBS   = -lpthread -lm
+LIBS   = -lpthread -lm -lpthread -lm -luser32 -ladvapi32 -lcomdlg32 -lshell32
 
 CFLAGS=	-Wall \
 	-Wextra \
@@ -120,30 +116,6 @@ CFLAGS=	-Wall \
 	-O3 \
 	-funsigned-char \
 	-I${INCDIR}
-
-ifeq ($(OS),Windows_NT)
-INCDIR = include\\
-LIBDIR = lib\\
-OBJDIR = obj\\
-SRCDIR = src\\
-TSTDIR = test\\
-CC     = cl
-LINK   = link
-RM     = del /q
-STRIP  = dir
-OBJEXT = .obj
-LIBEXT = .lib
-EXEEXT = .exe
-OFLAG  = -Fo
-XFLAG  = /NOLOGO /OUT:
-AR     = lib
-ARQC   = /NOLOGO /OUT:
-ARQ    = /NOLOGO
-RANLIB = dir
-LIBS   = user32.lib advapi32.lib comdlg32.lib shell32.lib
-
-CFLAGS = -Ox -Ot -MT -GT -volatile:iso -I${INCDIR} -nologo -J -sdl -Wall -WX -wd4464 -wd4710 -wd4711 -wd4201 -wd4820
-endif
 
 ${OBJDIR}%${OBJEXT} : ${SRCDIR}%.c
 	${CC} -c ${CPPFLAGS} ${CFLAGS} ${DFLAGS} ${OFLAG}$@ $<
